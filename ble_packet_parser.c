@@ -29,7 +29,7 @@ int parse_ble_packet(const char *packet, int *x, int *y, int *z) {
     *y = (short)strtol(y_str, NULL, 16);
     *z = (short)strtol(z_str, NULL, 16);
     
-    return 0;  // Return 0 to indicate successful parsing
+    return 0;  
 }
 
 const char* is_moving(int x, int y, int z) {
