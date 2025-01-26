@@ -1,6 +1,6 @@
 # BLE Packet Parser
 
-This program parses BLE (Bluetooth Low Energy) packets to extract accelerometer data and determines motion status (moving or stationary).
+To ingest accelerometer data from a real BLE Tag and detect whether the tag is moving or stationary
 
 ## Prerequisites
 
