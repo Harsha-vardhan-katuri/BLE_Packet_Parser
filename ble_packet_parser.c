@@ -60,6 +60,5 @@ int main() {
             printf("Motion Status: %s\n\n", status);
         }
     }
-
     return 0;
 }
