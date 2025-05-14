@@ -3,7 +3,7 @@
 #include <math.h>
 #include <string.h>
 
-int is_ibeacon(const char *packet) {
+int is_ibeacon(const char *packet) { 
     return (strncmp(packet, "0201061A", 8) == 0);
 }
 
