@@ -73,4 +73,4 @@ Motion Status: Stationary
 This project is released under the MIT License.
 
 ## Contributors
-- Harsha Vardhan Katuri
+- Katuri Harsha Vardhan
