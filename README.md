@@ -349,6 +349,21 @@ Place the following images inside the `images/` folder.
 - Git Version Control
 
 ---
+---
+
+# Final Recommendations
+
+This project can be further enhanced by implementing the following features:
+
+- Support additional BLE advertisement formats such as **Eddystone** and **Manufacturer Specific Data**.
+- Parse binary BLE packets directly from BLE hardware instead of hexadecimal strings.
+- Integrate UART/USB logging for deployment on embedded hardware platforms.
+- Export parsed sensor data in JSON or CSV format for external applications.
+- Add Continuous Integration (GitHub Actions) to automatically build and execute unit tests on every commit.
+- Integrate a professional C unit testing framework such as **Unity** or **CMock**.
+- Extend support for multiple sensor payload formats and configurable motion detection thresholds.
+
+These enhancements will improve the project's scalability, maintainability, and suitability for production-grade embedded firmware development.
 
 # Author
 
