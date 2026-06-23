@@ -1,6 +1,6 @@
 # BLE Packet Parser
 
-A modular **Embedded C** project that parses BLE (Bluetooth Low Energy) advertisement packets, validates packet integrity, identifies packet types, extracts accelerometer data, and determines device motion. The project demonstrates professional firmware development practices such as modular architecture, packet validation, logging, unit testing, build automation, and API documentation.
+A modular **Embedded C** project that parses BLE (Bluetooth Low Energy) advertisement packets, validates packet integrity, detects packet types, extracts accelerometer data, and determines motion status. The project demonstrates professional firmware development practices including modular architecture, packet validation, logging, unit testing, Makefile-based builds, and Doxygen documentation.
 
 ---
 
@@ -9,56 +9,66 @@ A modular **Embedded C** project that parses BLE (Bluetooth Low Energy) advertis
 BLE advertisement packets contain information broadcast by BLE devices. This project demonstrates how a firmware application can:
 
 - Validate incoming BLE packets
-- Detect packet type
+- Detect packet types (Sensor / iBeacon / Unknown)
 - Extract accelerometer values (X, Y, Z)
 - Calculate motion status
 - Log parser activities
 - Perform automated unit testing
 - Generate API documentation using Doxygen
 
-This project was developed using **Embedded C**, **GCC (MinGW)**, **VS Code**, **Makefile**, and **Doxygen**.
+Developed using **Embedded C**, **GCC (MinGW)**, **Visual Studio Code**, **Makefile**, and **Doxygen**.
 
 ---
 
 # Features
 
-- Parse BLE Advertisement Packets
-- Detect Sensor Packets
-- Detect iBeacon Packets
+- BLE Advertisement Packet Parsing
 - Packet Validation
 - Packet Type Detection
-- Extract Accelerometer Data (X, Y, Z)
-- Motion Detection using Acceleration Magnitude
-- Modular Software Architecture
+- Accelerometer Data Extraction
+- Motion Detection
 - Logging Framework
+- Modular Architecture
 - Unit Testing
-- Makefile-based Build System
-- Doxygen API Documentation
+- Makefile Build System
+- Doxygen Documentation
+
+---
+
+# Project Highlights
+
+- Modular Embedded C Architecture
+- Structures and Enums
+- Error Handling using Status Codes
+- Configuration using Macros
+- Logging Abstraction
+- Unit Testing
+- Professional Folder Organization
 
 ---
 
 # Project Workflow
 
 ```text
-                BLE Advertisement Packet
-                          │
-                          ▼
-                 Packet Validation
-                          │
-                          ▼
-               Packet Type Detection
-                          │
-                          ▼
-                 BLE Packet Parser
-                          │
-                          ▼
-             Accelerometer Data Extraction
-                          │
-                          ▼
-                 Motion Detection
-                          │
-                          ▼
-                   Logger Output
+BLE Advertisement Packet
+        │
+        ▼
+Packet Validation
+        │
+        ▼
+Packet Type Detection
+        │
+        ▼
+BLE Packet Parser
+        │
+        ▼
+Accelerometer Extraction
+        │
+        ▼
+Motion Detection
+        │
+        ▼
+Logger Output
 ```
 
 ---
@@ -66,27 +76,22 @@ This project was developed using **Embedded C**, **GCC (MinGW)**, **VS Code**, *
 # Software Architecture
 
 ```text
-                      main.c
-                         │
-                         ▼
-                  ble_parser.c
-              ┌──────────┼──────────┐
-              │          │          │
-              ▼          ▼          ▼
-      validate_packet() detect_packet_type() parse_ble_packet()
-                         │
-                         ▼
-                    ble_utils.c
-              ┌──────────┼──────────┐
-              │          │          │
-              ▼          ▼          ▼
-        is_ibeacon() is_moving() motion_to_string()
-                         │
-                         ▼
-                    ble_logger.h
-                         │
-                         ▼
-                     Console Log
+main.c
+   │
+   ▼
+ble_parser.c
+   ├── validate_packet()
+   ├── detect_packet_type()
+   └── parse_ble_packet()
+   │
+   ▼
+ble_utils.c
+   ├── is_ibeacon()
+   ├── is_moving()
+   └── motion_to_string()
+   │
+   ▼
+ble_logger.h
 ```
 
 ---
@@ -96,28 +101,24 @@ This project was developed using **Embedded C**, **GCC (MinGW)**, **VS Code**, *
 ```text
 BLE_Packet_Parser
 │
-├── include
+├── include/
 │   ├── ble_config.h
 │   ├── ble_logger.h
 │   ├── ble_parser.h
 │   ├── ble_types.h
 │   └── ble_utils.h
 │
-├── src
+├── src/
 │   ├── main.c
 │   ├── ble_parser.c
 │   ├── ble_utils.c
 │   └── ble_logger.c
 │
-├── test
+├── test/
 │   └── test_packets.c
 │
-├── docs
-│
-├── html
-│
-├── latex
-│
+├── docs/
+├── images/
 ├── Doxyfile
 ├── Makefile
 ├── README.md
@@ -129,92 +130,66 @@ BLE_Packet_Parser
 
 # BLE Packet Format
 
-Example Sensor Packet
+Sensor Packet
 
 ```text
 0201060303E1FF1216E1FFA10364FFF4000FFF003772A33F23AC
 ```
 
-Example iBeacon Packet
+iBeacon Packet
 
 ```text
 0201061AFF4C00021553594F4F4B534F4349414C444953544500000000E8
 ```
 
-The parser identifies the packet type before extracting sensor information.
-
----
-
-# Supported Packet Types
-
-| Packet Type | Status |
-|-------------|--------|
-| Sensor Packet | Supported |
-| iBeacon Packet | Supported |
-| Unknown Packet | Supported |
-
 ---
 
 # Motion Detection
 
-Acceleration magnitude is calculated using:
-
 ```text
 Magnitude = √(X² + Y² + Z²)
-```
 
-Converted into **g**:
-
-```text
 Magnitude(g) = Magnitude / 16384
 ```
 
-If
-
-```text
-Magnitude(g) > Motion Threshold
-```
-
-Device Status:
-
-```text
-Moving
-```
-
-Otherwise
-
-```text
-Stationary
-```
+If the magnitude exceeds the configured threshold, the device is classified as **Moving**; otherwise it is **Stationary**.
 
 ---
 
 # Logging Framework
 
-The project uses logging macros instead of directly calling `printf()`.
-
-Available log levels:
-
 ```c
-LOG_INFO()
-
-LOG_WARNING()
-
-LOG_ERROR()
-
-LOG_DEBUG()
+LOG_INFO(...)
+LOG_WARNING(...)
+LOG_ERROR(...)
+LOG_DEBUG(...)
 ```
 
-Example Output
+Example:
 
 ```text
 [INFO] Sensor Packet
-
 [INFO] Accelerometer Extracted
-
 [WARNING] iBeacon Packet
-
 [ERROR] Invalid Packet Length
+```
+
+---
+
+# Requirements
+
+- GCC (MinGW)
+- GNU Make (mingw32-make)
+- Visual Studio Code (optional)
+- Doxygen (optional)
+
+---
+
+# Installation
+
+```bash
+git clone https://github.com/harsha-vardhan-katuri/BLE_Packet_Parser.git
+cd BLE_Packet_Parser
 ```
 
 ---
@@ -233,7 +208,7 @@ Run
 mingw32-make run
 ```
 
-Run Unit Tests
+Run Tests
 
 ```bash
 mingw32-make test
@@ -255,31 +230,21 @@ mingw32-make rebuild
 
 # Unit Testing
 
-The project includes automated unit tests covering:
+Current test coverage:
 
 - Valid Sensor Packet
 - iBeacon Packet
 - Invalid Packet Length
-- NULL Packet
 - Invalid Packet Data
+- NULL Packet
 
-Run tests:
-
-```bash
-mingw32-make test
-```
-
-Example Output
+Example:
 
 ```text
 [PASS] Test 1
-
 [PASS] Test 2
-
 [PASS] Test 3
-
 [PASS] Test 4
-
 [PASS] Test 5
 
 Passed 5/5 Tests
@@ -289,26 +254,17 @@ Passed 5/5 Tests
 
 # Doxygen Documentation
 
-Generate API documentation
+Generate documentation:
 
 ```bash
 doxygen Doxyfile
 ```
 
-Generated documentation can be viewed from:
+Open:
 
 ```text
 html/index.html
 ```
-
-The documentation includes:
-
-- File Documentation
-- Function Documentation
-- Data Structures
-- Enums
-- Macros
-- Call Graphs (if Graphviz is installed)
 
 ---
 
@@ -318,27 +274,41 @@ The documentation includes:
 [INFO] BLE Packet Parser Started
 
 [INFO] Sensor Packet
-
 [INFO] Accelerometer Extracted
 
-Parsed Data
-
+Parsed Data:
 X = -12
-
 Y = 15
-
 Z = -256
 
-Motion : Stationary
-
----------------------------------
+Motion Status : Stationary
 
 [WARNING] iBeacon Packet
 
----------------------------------
-
 [INFO] Parsing Completed
 ```
+
+---
+
+# Screenshots
+
+Place the following images inside the `images/` folder.
+
+## Project Structure
+
+![Project Structure](images/project_structure.png)
+
+## Parser Output
+
+![Parser Output](images/parser_output.png)
+
+## Unit Test Results
+
+![Unit Test Results](images/unit_test_output.png)
+
+## Doxygen Documentation
+
+![Doxygen Documentation](images/doxygen_output.png)
 
 ---
 
@@ -360,66 +330,23 @@ Motion : Stationary
 - Parse Manufacturer Specific Data
 - Binary BLE Packet Parsing
 - UART Logging
-- File Logging
-- JSON Output Support
-- BLE CRC Verification
+- JSON Export
 - Unity Test Framework
-- Continuous Integration using GitHub Actions
-
----
-
-# Screenshots
-
-Add your screenshots inside an **images/** folder.
-
-Example:
-
-```text
-images/
-├── project_structure.png
-├── parser_output.png
-├── unit_test_output.png
-├── doxygen_output.png
-```
-
-Then display them like this:
-
-```markdown
-## Project Structure
-
-![Project Structure](images/project_structure.png)
-
-## Parser Output
-
-![Parser Output](images/parser_output.png)
-
-## Unit Test Results
-
-![Unit Test](images/unit_test_output.png)
-
-## Doxygen Documentation
-
-![Doxygen](images/doxygen_output.png)
-```
+- GitHub Actions CI
 
 ---
 
 # Learning Outcomes
 
-This project demonstrates:
-
 - Modular Embedded C Programming
-- BLE Advertisement Packet Parsing
+- BLE Packet Parsing
 - Packet Validation
-- Packet Type Detection
-- Data Extraction
-- Motion Detection Algorithm
+- Motion Detection
 - Logging Framework
 - Unit Testing
-- Build Automation using Makefile
-- API Documentation using Doxygen
+- Makefile Build Automation
+- API Documentation
 - Git Version Control
-- Professional Project Organization
 
 ---
 
