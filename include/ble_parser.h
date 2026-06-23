@@ -3,7 +3,7 @@
 
 #include "ble_types.h"
 
-int parse_ble_packet(const char *packet,
-                     AccelerometerData_t *accel);
+BLEStatus_t parse_ble_packet(const char *packet,
+                             AccelerometerData_t *accel);
 
 #endif

@@ -17,22 +17,23 @@ int main()
 
     AccelerometerData_t accel;
 
-    const char *status;
+    MotionState_t motion;
 
     for (int i = 0; i < 6; i++)
     {
         printf("BLE Packet: %s\n", packets[i]);
 
-        if (parse_ble_packet(packets[i], &accel) == 0)
+        if (parse_ble_packet(packets[i], &accel) == BLE_OK)
         {
-            printf("Parsed Data: x=%d, y=%d, z=%d\n",
+            printf("Parsed Data: X=%d, Y=%d, Z=%d\n",
                    accel.x,
                    accel.y,
                    accel.z);
 
-            status = is_moving(&accel);
+            motion = is_moving(&accel);
 
-            printf("Motion Status: %s\n\n", status);
+            printf("Motion Status: %s\n\n",
+                   motion_to_string(motion));
         }
     }
 
