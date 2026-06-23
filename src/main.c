@@ -19,22 +19,29 @@ int main()
 
     MotionState_t motion;
 
+    BLEStatus_t status;
+
     for (int i = 0; i < 6; i++)
     {
-        printf("BLE Packet: %s\n", packets[i]);
+        printf("BLE Packet : %s\n", packets[i]);
 
-        if (parse_ble_packet(packets[i], &accel) == BLE_OK)
+        status = parse_ble_packet(packets[i], &accel);
+
+        if (status != BLE_OK)
         {
-            printf("Parsed Data: X=%d, Y=%d, Z=%d\n",
-                   accel.x,
-                   accel.y,
-                   accel.z);
-
-            motion = is_moving(&accel);
-
-            printf("Motion Status: %s\n\n",
-                   motion_to_string(motion));
+            printf("Packet rejected (Status = %d)\n\n", status);
+            continue;
         }
+
+        printf("Parsed Data : X=%d Y=%d Z=%d\n",
+               accel.x,
+               accel.y,
+               accel.z);
+
+        motion = is_moving(&accel);
+
+        printf("Motion Status : %s\n\n",
+               motion_to_string(motion));
     }
 
     return 0;

@@ -20,13 +20,18 @@ typedef enum
 
 } MotionState_t;
 
-/* BLE Parser Status */
+/* BLE Status */
 typedef enum
 {
     BLE_OK = 0,
-    BLE_IBEACON,
+
+    BLE_NULL_PACKET,
+
     BLE_INVALID_LENGTH,
-    BLE_INVALID_DATA
+
+    BLE_INVALID_DATA,
+
+    BLE_IBEACON
 
 } BLEStatus_t;
 

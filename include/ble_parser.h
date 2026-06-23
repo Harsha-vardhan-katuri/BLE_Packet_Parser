@@ -6,4 +6,6 @@
 BLEStatus_t parse_ble_packet(const char *packet,
                              AccelerometerData_t *accel);
 
+BLEStatus_t validate_packet(const char *packet);
+
 #endif

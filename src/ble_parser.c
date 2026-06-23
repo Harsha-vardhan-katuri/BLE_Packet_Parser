@@ -1,14 +1,49 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
+#include <ctype.h>
 
 #include "ble_parser.h"
 #include "ble_utils.h"
 #include "ble_config.h"
 
-BLEStatus_t parse_ble_packet(const char *packet,
-                     AccelerometerData_t *accel)
+static int is_hex_string(const char *packet)
 {
+    while (*packet)
+    {
+        if (!isxdigit((unsigned char)*packet))
+            return 0;
+
+        packet++;
+    }
+
+    return 1;
+}
+
+BLEStatus_t validate_packet(const char *packet)
+{
+    if (packet == NULL)
+        return BLE_NULL_PACKET;
+
+    if (strlen(packet) < MIN_PACKET_LENGTH)
+        return BLE_INVALID_LENGTH;
+
+    if (!is_hex_string(packet))
+        return BLE_INVALID_DATA;
+
+    return BLE_OK;
+}
+
+BLEStatus_t parse_ble_packet(const char *packet,
+                             AccelerometerData_t *accel)
+{
+    BLEStatus_t status;
+
+    status = validate_packet(packet);
+
+    if (status != BLE_OK)
+        return status;
+
     if (is_ibeacon(packet))
     {
         printf("Cannot find accelerometer data in the packet (iBeacon).\n\n");
