@@ -21,6 +21,14 @@ static int is_hex_string(const char *packet)
     return 1;
 }
 
+/**
+ * @brief Validates a BLE advertisement packet.
+ *
+ * @param packet Raw BLE packet.
+ *
+ * @return BLEStatus_t
+ */
+
 BLEStatus_t validate_packet(const char *packet)
 {
     if (packet == NULL)
@@ -44,6 +52,14 @@ BLEStatus_t validate_packet(const char *packet)
     return BLE_OK;
 }
 
+/**
+ * @brief Detects BLE advertisement packet type.
+ *
+ * @param packet Raw BLE packet.
+ *
+ * @return PacketType_t
+ */
+
 PacketType_t detect_packet_type(const char *packet)
 {
     if (is_ibeacon(packet))
@@ -54,6 +70,15 @@ PacketType_t detect_packet_type(const char *packet)
 
     return UNKNOWN_PACKET;
 }
+
+/**
+ * @brief Extracts accelerometer values from BLE advertisement.
+ *
+ * @param packet Raw BLE advertisement packet.
+ * @param accel Output accelerometer structure.
+ *
+ * @return BLEStatus_t
+ */
 
 BLEStatus_t parse_ble_packet(const char *packet,
                              AccelerometerData_t *accel)

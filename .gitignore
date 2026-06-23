@@ -1,0 +1,17 @@
+# Build files
+*.exe
+*.o
+*.obj
+
+# VS Code
+.vscode/
+
+# Generated documentation
+html/
+latex/
+
+# Windows
+Thumbs.db
+
+# Temporary files
+*.log

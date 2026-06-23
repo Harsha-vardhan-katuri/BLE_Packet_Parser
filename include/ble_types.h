@@ -3,16 +3,20 @@
 
 #include <stdint.h>
 
-/* Accelerometer Data */
+/**
+ * @brief Stores accelerometer data.
+ */
 typedef struct
 {
-    int16_t x;
-    int16_t y;
-    int16_t z;
+    int16_t x;   /**< X-axis acceleration */
+    int16_t y;   /**< Y-axis acceleration */
+    int16_t z;   /**< Z-axis acceleration */
 
 } AccelerometerData_t;
 
-/* Motion Status */
+/**
+ * @brief Motion state.
+ */
 typedef enum
 {
     STATIONARY = 0,
@@ -20,7 +24,9 @@ typedef enum
 
 } MotionState_t;
 
-/* BLE Status */
+/**
+ * @brief BLE parser status.
+ */
 typedef enum
 {
     BLE_OK = 0,
@@ -31,7 +37,9 @@ typedef enum
 
 } BLEStatus_t;
 
-/* Packet Types */
+/**
+ * @brief Supported BLE packet types.
+ */
 typedef enum
 {
     SENSOR_PACKET = 0,
