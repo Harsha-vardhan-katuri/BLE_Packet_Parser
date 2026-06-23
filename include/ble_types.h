@@ -24,15 +24,20 @@ typedef enum
 typedef enum
 {
     BLE_OK = 0,
-
     BLE_NULL_PACKET,
-
     BLE_INVALID_LENGTH,
-
     BLE_INVALID_DATA,
-
     BLE_IBEACON
 
 } BLEStatus_t;
+
+/* Packet Types */
+typedef enum
+{
+    SENSOR_PACKET = 0,
+    IBEACON_PACKET,
+    UNKNOWN_PACKET
+
+} PacketType_t;
 
 #endif

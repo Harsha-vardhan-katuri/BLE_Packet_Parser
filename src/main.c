@@ -2,6 +2,7 @@
 
 #include "ble_parser.h"
 #include "ble_utils.h"
+#include "ble_logger.h"
 
 int main()
 {
@@ -21,28 +22,31 @@ int main()
 
     BLEStatus_t status;
 
+    LOG_INFO("BLE Packet Parser Started");
+
     for (int i = 0; i < 6; i++)
     {
-        printf("BLE Packet : %s\n", packets[i]);
+        LOG_INFO("Processing Packet %d", i + 1);
 
         status = parse_ble_packet(packets[i], &accel);
 
         if (status != BLE_OK)
-        {
-            printf("Packet rejected (Status = %d)\n\n", status);
             continue;
-        }
 
-        printf("Parsed Data : X=%d Y=%d Z=%d\n",
+        printf("Packet : %s\n", packets[i]);
+
+        printf("X=%d  Y=%d  Z=%d\n",
                accel.x,
                accel.y,
                accel.z);
 
         motion = is_moving(&accel);
 
-        printf("Motion Status : %s\n\n",
+        printf("Motion : %s\n\n",
                motion_to_string(motion));
     }
+
+    LOG_INFO("Parsing Completed");
 
     return 0;
 }

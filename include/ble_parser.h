@@ -8,4 +8,6 @@ BLEStatus_t parse_ble_packet(const char *packet,
 
 BLEStatus_t validate_packet(const char *packet);
 
+PacketType_t detect_packet_type(const char *packet);
+
 #endif
