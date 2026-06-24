@@ -1,0 +1,55 @@
+name: BLE Packet Parser CI
+
+on:
+  push:
+    branches:
+      - main
+      - master
+
+  pull_request:
+    branches:
+      - main
+      - master
+
+jobs:
+  build-and-test:
+
+    runs-on: ubuntu-latest
+
+    steps:
+
+    - name: Checkout Repository
+      uses: actions/checkout@v4
+
+    - name: Install GCC
+      run: |
+        sudo apt update
+        sudo apt install -y build-essential
+
+    - name: Build Application
+      run: |
+        gcc -Wall -Iinclude \
+        src/main.c \
+        src/ble_parser.c \
+        src/ble_utils.c \
+        src/ble_logger.c \
+        -o BLEParser \
+        -lm
+
+    - name: Run Application
+      run: |
+        ./BLEParser
+
+    - name: Build Unit Tests
+      run: |
+        gcc -Wall -Iinclude \
+        test/test_packets.c \
+        src/ble_parser.c \
+        src/ble_utils.c \
+        src/ble_logger.c \
+        -o BLEParser_Test \
+        -lm
+
+    - name: Execute Unit Tests
+      run: |
+        ./BLEParser_Test
