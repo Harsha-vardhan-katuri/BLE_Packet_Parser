@@ -1,5 +1,6 @@
 # BLE Packet Parser
 
+![CI](https://github.com/harsha-vardhan-katuri/BLE_Packet_Parser/actions/workflows/build.yml/badge.svg)
 
 A modular **Embedded C** project that parses BLE (Bluetooth Low Energy) advertisement packets, validates packet integrity, detects packet types, extracts accelerometer data, and determines motion status. The project demonstrates professional firmware development practices including modular architecture, packet validation, logging, unit testing, Makefile-based builds, and Doxygen documentation.
 
